@@ -1,0 +1,52 @@
+------Binary Origin
+function binary_search(A, n, T) is
+    L:= 0
+    R:= n − 1
+    while L ≤ R do
+        m:= floor((L + R) / 2)
+        if A[m] < T then
+            L:= m + 1
+        else if A[m] > T then
+            R:= m - 1
+        else:
+            return m
+    return không_thành_công
+
+Quy trình trên có thể trả về bất cứ chỉ số nào có giá trị phần tử bằng giá trị cần tìm, kể cả khi trong mảng có các phần tử xuất hiện lặp lại. 
+Ví dụ, với mảng [1,2,3,4,4,5,6,7]} và giá trị cần tìm là 4, thuật toán có thể trả về một trong hai kết quả đúng là phần tử 
+thứ 4 (chỉ số là 3) hoặc thứ 5 (chỉ số là 4). Quy trình chuẩn trong trường hợp này sẽ trả về phần tử thứ 4 (chỉ số 3). 
+Thuật toán này không phải lúc nào cũng trả về vị trí đầu tiên xuất hiện giá trị cần tìm (ví dụ với mảng [1,2,4,4,4,5,6,7]
+kết quả trả về vẫn là phần tử thứ 4). Tuy nhiên, có một số trường hợp cần phải tìm phần tử nằm xa nhất về phía bên trái hoặc 
+bên phải mang giá trị cần tìm khi giá trị này xuất hiện lặp lại trong mảng. Trong ví dụ trên, phần tử thứ 2 là phần tử đứng 
+xa nhất về bên trái mang giá trị 4, trong khi phần tử thứ 5 là phần từ đứng xa nhất về bên phải mang giá trị 4. 
+Cách làm thứ hai ở trên sẽ luôn trả về chỉ số của phần tử đứng xa nhất về bên phải nếu tồn tại các phần tử lặp lại.[10]
+
+------Tìm phần tử xa nhất về bên trái:
+function binary_search_leftmost(A, n, T):
+    L:= 0
+    R:= n
+    while L < R:
+        m:= floor((L + R) / 2)
+        if A[m] < T:
+            L:= m + 1
+        else:
+            R:= m
+    if(a[L] == T):
+        return L
+    else:
+        return -1
+
+------Tìm phần tử xa nhất về bên phải:
+function binary_search_rightmost(A, n, T):
+    L:= 0
+    R:= n
+    while L < R:
+        m:= floor((L + R) / 2)
+        if A[m] > T:
+            R:= m
+        else:
+            L:= m + 1
+    if(a[R-1] == T):
+        return R-1
+    else:
+        return -1
